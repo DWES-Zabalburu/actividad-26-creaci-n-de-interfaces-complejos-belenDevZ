@@ -24,10 +24,11 @@ import javax.swing.JTextField;
  * @author DAW1
  */
 public class FrmVentana extends JFrame{
-  private Dimension dmVentana = new Dimension(800, 450);
+  private Dimension dmVentana = new Dimension(600, 550);
+  
     
     
-    private JLabel lblTitulo = new JLabel("Formulario de Empleados");
+    private JLabel lblTitulo = new JLabel("Actualiza tu Perfil");
     private JLabel lblNombre = new JLabel("Nombre Completo");
     private JTextField txtNombre = new JTextField();
     private JLabel lblCorreo = new JLabel("Correo");
@@ -41,19 +42,22 @@ public class FrmVentana extends JFrame{
     
     private JButton btnGuardar = new JButton("Guardar Cambios");
     private JButton btnCancelar = new JButton("Cancelar");
+
     
     
     private JPanel pnlDatos = new JPanel(new GridLayout(10,1,0,10));
     private JPanel pnlBotones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-    private final Color COLOR_FONDO = new Color(153,204,255);
-    private final Color COLOR_TEXTO = new Color(0,0,153);
-    private final Font FUENTE = new Font("Calibri", Font.PLAIN,22);
+    private final Color COLOR_FONDO = new Color(70, 105, 180);
+    private final Color COLOR_TEXTO = new Color(255,255,255);
+    private final Color COLOR_FONDODATOS = new Color(145,145,145,5);
+    private final Font FUENTE = new Font("Calibri", Font.PLAIN,15);
     
     public FrmVentana(){
         this.setSize(dmVentana);
+        
         this.setTitle("Mi Perfil");
         lblTitulo.setFont(new Font("Calibri",Font.BOLD,32));
-        lblTitulo.setHorizontalAlignment(JLabel.CENTER);
+        lblTitulo.setHorizontalAlignment(JLabel.LEFT);
         lblTitulo.setForeground(COLOR_TEXTO);
         lblTitulo.setOpaque(true);
         lblTitulo.setBackground(COLOR_FONDO);
@@ -71,17 +75,18 @@ public class FrmVentana extends JFrame{
         pnlDatos.add(lblWeb);
         pnlDatos.add(txtWeb);
         pnlDatos.setBorder(BorderFactory.createEmptyBorder(0, 20, 10, 20));
-        pnlDatos.setBackground(Color.WHITE);
+        pnlDatos.setBackground(COLOR_FONDODATOS);
         
         for (int i = 0; i < pnlDatos.getComponentCount(); i++) {
             Component cmp = pnlDatos.getComponent(i);
             //if (i % 2 == 0){
             if (cmp instanceof JLabel) {
                 cmp.setFont(FUENTE.deriveFont(Font.BOLD));
-            } else {
-                cmp.setFont(FUENTE);
-            }
+        } else {
+            cmp.setFont(FUENTE);
+            ((JTextField) cmp).setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(0, 102, 204)));
         }
+    }
             
         
         
@@ -89,16 +94,23 @@ public class FrmVentana extends JFrame{
         this.add(pnlDatos, BorderLayout.CENTER);
         btnCancelar.setFont(FUENTE);
         btnGuardar.setFont(FUENTE);
+        btnGuardar.setForeground(COLOR_TEXTO);
+        btnGuardar.setBackground(COLOR_FONDO);
         btnGuardar.setToolTipText("Guardar Cambios");
         btnGuardar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnCancelar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnCancelar.setEnabled(false);
+
+
+        pnlBotones.add(btnCancelar);
         pnlBotones.add(btnGuardar);
         btnGuardar.setMnemonic('E');
-        pnlBotones.add(btnCancelar);
+
         //pnlBotones.setBackground(COLOR_FONDO.darker().darker());
-        pnlBotones.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(Color.BLUE),
-            BorderFactory.createEmptyBorder(0, 0, 0,0)
-            ));
+        pnlBotones.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));  
+        
+        this.add(pnlBotones, BorderLayout.SOUTH);
+
     
 
         
@@ -106,6 +118,8 @@ public class FrmVentana extends JFrame{
         this.setLocationRelativeTo(null);
         this.getRootPane().setDefaultButton(btnGuardar);
         this.setResizable(false);
+        this.getRootPane().setDefaultButton(btnGuardar); // ENTERT GUARDA CAMBIOS
+
      }
     
     public static void main(String[] args) {
@@ -116,4 +130,4 @@ public class FrmVentana extends JFrame{
     }
     
     
-}
+}  
